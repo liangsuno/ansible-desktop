@@ -1,15 +1,23 @@
----
-- hosts: localhost
-  connection: local
+# tasks to complete before running roles
+- hosts: all
+  tags: always
   become: true
+  pre_tasks:
+    - name: pre-run | update package cache (arch)
+      tags: always
+      pacman: update_cache=yes
+      changed_when: False
+      when: ansible_distribution == "Archlinux"
 
-  tasks:
-  - name: install packages
-    package:
-      name:
-        - htop
-        - zip
-        - unzip
-        - moreutils
-        - tmux
-        - vim-nox
+    - name: pre-run | update package cache (debian, etc)
+      tags: always
+      apt: update_cache=yes
+      changed_when: False
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+
+# run roles
+- hosts: all
+  tags: base
+  become: true
+  roles:
+    - base
