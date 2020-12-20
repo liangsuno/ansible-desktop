@@ -9,11 +9,11 @@
       changed_when: False
       when: ansible_distribution == "Archlinux"
 
-    - name: pre-run | update package cache (debian, etc)
-      tags: always
-      apt: update_cache=yes
-      changed_when: False
-      when: ansible_distribution in ["Debian", "Ubuntu"]
+      #    - name: pre-run | update package cache (debian, etc)
+      #      tags: always
+      #apt: update_cache=yes
+      #changed_when: False
+      #when: ansible_distribution in ["Debian", "Ubuntu"]
 
 # run roles
 - hosts: all
