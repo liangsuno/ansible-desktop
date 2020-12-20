@@ -8,5 +8,8 @@
     package:
       name:
         - htop
+        - zip
+        - unzip
+        - moreutils
         - tmux
         - vim-nox
